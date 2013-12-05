@@ -35,12 +35,16 @@ public class MainActivity extends Activity implements View.OnClickListener,
 	private Button mLogoutBtn = null;
 	private Button mTestBtn = null;
 	
-	
+//	VPN帐号：
+//	http://218.94.159.229
+//	oaceshi   Gtig_123
+//	内网映射地址：10.132.1.141:1723 
+//	部署URL：http://10.132.1.219/padoa/updateclient/download.html
 	int port = 443;
-	String vpnip = "221.224.118.92";
-	String username = "test";
-	String password = "123456";
-	String testurl = "http://192.168.0.220:8080/MobileOaInterface/updateclient/update.xml";
+	String vpnip = "218.94.159.229";
+	String username = "oaceshi";
+	String password = "Gtig_123";
+	String testurl = "http://10.132.1.219/padoa/updateclient/update_ipad.xml";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
