@@ -44,6 +44,7 @@ public class MainActivity extends Activity implements View.OnClickListener,
 	String vpnip = "218.94.159.229";
 	String username = "oaceshi";
 	String password = "Gtig_123";
+//	String testurl = "http://10.132.1.141:1723/padoa/updateclient/update_ipad.xml";
 	String testurl = "http://10.132.1.219/padoa/updateclient/update_ipad.xml";
 
 	@Override
