@@ -34,6 +34,13 @@ public class MainActivity extends Activity implements View.OnClickListener,
 	private Button mLoginBtn = null;
 	private Button mLogoutBtn = null;
 	private Button mTestBtn = null;
+	
+	
+	int port = 443;
+	String vpnip = "221.224.118.92";
+	String username = "test";
+	String password = "123456";
+	String testurl = "http://192.168.0.220:8080/MobileOaInterface/updateclient/update.xml";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -89,7 +96,7 @@ public class MainActivity extends Activity implements View.OnClickListener,
 
 		InetAddress iAddr = null;
 		try {
-			iAddr = InetAddress.getByName("221.224.118.92");
+			iAddr = InetAddress.getByName(vpnip);
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
@@ -98,7 +105,7 @@ public class MainActivity extends Activity implements View.OnClickListener,
 			return false;
 		}
 		long host = VpnCommon.ipToLong(iAddr.getHostAddress());
-		int port = 443;
+		
 
 		if (sfAuth.vpnInit(host, port) == false) {
 			Log.d(TAG, "vpn init fail, errno is " + sfAuth.vpnGeterr());
@@ -125,14 +132,13 @@ public class MainActivity extends Activity implements View.OnClickListener,
 
 		switch (authType) {
 		case IVpnDelegate.AUTH_TYPE_CERTIFICATE:
-			sForward.setLoginParam(IVpnDelegate.CERT_PASSWORD, "123456");
+			sForward.setLoginParam(IVpnDelegate.CERT_PASSWORD, password);
 			sForward.setLoginParam(IVpnDelegate.CERT_P12_FILE_NAME,"/sdcard/csh/csh.p12");
 			ret = sForward.vpnLogin(IVpnDelegate.AUTH_TYPE_CERTIFICATE);
 			break;
 		case IVpnDelegate.AUTH_TYPE_PASSWORD:
-			sForward.setLoginParam(IVpnDelegate.PASSWORD_AUTH_USERNAME, "test");
-			sForward.setLoginParam(IVpnDelegate.PASSWORD_AUTH_PASSWORD,
-					"123456");
+			sForward.setLoginParam(IVpnDelegate.PASSWORD_AUTH_USERNAME, username);
+			sForward.setLoginParam(IVpnDelegate.PASSWORD_AUTH_PASSWORD,password);
 			ret = sForward.vpnLogin(IVpnDelegate.AUTH_TYPE_PASSWORD);
 			break;
 		default:
@@ -147,7 +153,7 @@ public class MainActivity extends Activity implements View.OnClickListener,
 			String bs = null;
 			try {
 				bs = HttpHelp
-						.getHttpBackNoZipNoCheck("http://192.168.0.220:8080/MobileOaInterface/updateclient/update.xml");
+						.getHttpBackNoZipNoCheck(testurl);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
